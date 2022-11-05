@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:world_cup_2022/models/Nation.dart';
+import '../../models/Stats.dart';
 
 class CardNation extends StatelessWidget {
   const CardNation(
@@ -11,8 +12,8 @@ class CardNation extends StatelessWidget {
       required this.nation2, 
       required this.date, 
       required this.time, 
-      required this.team_1_goal, 
-      required this.team_2_goal, 
+      required this.team1, 
+      required this.team2, 
 
     }
   );
@@ -21,8 +22,8 @@ class CardNation extends StatelessWidget {
   final Nation nation2;
   final String date;
   final String time;
-  final int team_1_goal;
-  final int team_2_goal;
+  final Stats team1;
+  final Stats team2;
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +98,7 @@ class CardNation extends StatelessWidget {
                     ),
                     Spacer(),
                     Text(
-                      '${team_1_goal}' +' : ' + '${team_2_goal}',
+                      '${team1.goal}' +' : ' + '${team2.goal}',
                       style: TextStyle(  
                         color: Colors.white,
                         fontSize: 24

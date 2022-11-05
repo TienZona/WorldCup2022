@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'Stats.dart';
 
 class Match {
   final String? id;
@@ -6,8 +7,8 @@ class Match {
   final String id_team_2;
   final String date;
   final String time;
-  final int team_1_goal;
-  final int team_2_goal;
+  final Stats team1;
+  final Stats team2;
 
   Match({
     this.id,
@@ -15,8 +16,8 @@ class Match {
     required this.id_team_2,
     required this.date,
     required this.time,
-    required this.team_1_goal,
-    required this.team_2_goal,
+    required this.team1,
+    required this.team2,
 
   });
 
@@ -26,8 +27,8 @@ class Match {
     String? id_team_2,
     String? date,
     String? time,
-    int? team_1_goal,
-    int? team_2_goal,
+    Stats? team1,
+    Stats? team2,
   }) {
     return Match(
       id: id ?? this.id,
@@ -35,8 +36,8 @@ class Match {
       id_team_2: id_team_2 ?? this.id_team_1,
       date: date ?? this.date,
       time: time ?? this.time,
-      team_1_goal: team_1_goal ?? this.team_1_goal,
-      team_2_goal: team_2_goal ?? this.team_2_goal,
+      team1: team1 ?? this.team1,
+      team2: team2 ?? this.team2,
     );
   }
 
