@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:world_cup_2022/models/Nation.dart';
-import '../widgets/cart_nation.dart';
+import 'package:world_cup_2022/ui/managers/match_manager.dart';
+import '../widgets/card_nation.dart';
+import '../../models/Match.dart';
+import '../../models/Stats.dart';
 import '../managers/nation_manager.dart';
+import '../shared/drawer.dart';
 
 class MyHomePage extends StatefulWidget {
+  static const routeName = '/home';
+
   const MyHomePage({super.key, required this.title});
   final String title;
 
@@ -15,15 +21,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final nationManager = NationManager();
+    final matchManager = MatchManager();
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text(
+        title: Text(
             widget.title,
-          ),
-        ),        
+          ),       
       ),
+      drawer: const AppDrawer(),
       body: Container(  
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -32,20 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         child: ListView.builder(
-          itemCount: nationManager.itemCount,
+          itemCount: matchManager.itemCount,
           itemBuilder: (BuildContext context, int index){
-            final id1 = nationManager.matchs.id_team_1;
-            final id2 = nationManager.matchs.id_team_2;
-            final nation1 = nationManager.getNation(id1);
-            final nation2 = nationManager.getNation(id2);
-            return CardNation(
-              nation1: Nation(id: nation1.id, name: nation1.name, logo: nation1.logo), 
-              nation2: Nation(id: nation2.id, name: nation2.name, logo: nation2.logo),
-              date: nationManager.matchs.date,
-              time: nationManager.matchs.time,
-              team1: nationManager.matchs.team1,
-              team2: nationManager.matchs.team2,
-            );
+            return CardNation(matchManager.matchs[index]);
           },
         ),
       ),

@@ -1,33 +1,31 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:world_cup_2022/models/Nation.dart';
-import '../../models/Stats.dart';
+import 'package:world_cup_2022/ui/managers/nation_manager.dart';
+import 'package:world_cup_2022/ui/screens/detail_match.dart';
+import '../../models/Match.dart';
 
 class CardNation extends StatelessWidget {
   const CardNation(
-    {
-      super.key, 
-      required this.nation1, 
-      required this.nation2, 
-      required this.date, 
-      required this.time, 
-      required this.team1, 
-      required this.team2, 
-
+    this.match, {
+      super.key,
     }
   );
 
-  final Nation nation1;
-  final Nation nation2;
-  final String date;
-  final String time;
-  final Stats team1;
-  final Stats team2;
+  final Match match;
 
   @override
   Widget build(BuildContext context) {
-    return  SizedBox(  
+    final Nation nation1 = NationManager().findById(match.t1_id);
+    final Nation nation2 = NationManager().findById(match.t2_id);
+
+    return  GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          DetailMatch.routeName,
+          arguments: match.id,
+        );
+      },
+      child: SizedBox(  
         height: 150,
         child: Card(
           color: Color.fromARGB(255, 5, 62, 62),
@@ -82,7 +80,7 @@ class CardNation extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      '${date}',
+                      '${match.date}',
                       style: TextStyle(  
                         color: Colors.white,
                         fontSize: 16
@@ -90,7 +88,7 @@ class CardNation extends StatelessWidget {
                     ),
                     Spacer(flex: 2),
                     Text(
-                      '${time}',
+                      '${match.time}',
                       style: TextStyle(  
                         color: Colors.white,
                         fontSize: 12,
@@ -98,7 +96,7 @@ class CardNation extends StatelessWidget {
                     ),
                     Spacer(),
                     Text(
-                      '${team1.goal}' +' : ' + '${team2.goal}',
+                      '${match.t1_goal}' +' : ' + '${match.t2_goal}',
                       style: TextStyle(  
                         color: Colors.white,
                         fontSize: 24
@@ -144,6 +142,7 @@ class CardNation extends StatelessWidget {
             ],
           ),
         ),
-      );
+      ),
+    );
   }
 }
