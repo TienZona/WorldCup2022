@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:world_cup_2022/ui/managers/nation_manager.dart';
-
+import 'package:provider/provider.dart';
 import '../shared/drawer.dart';
 import '../widgets/card_nation_2.dart';
 
@@ -19,7 +19,7 @@ class ListNation extends StatelessWidget {
       ),
       drawer: const AppDrawer(),
       body: Container(  
-        decoration: new BoxDecoration(color: Color.fromARGB(255, 255, 255, 255)),
+        decoration: new BoxDecoration(color: Color.fromARGB(255, 14, 53, 95)),
         child: GridView.builder(  
           padding: const EdgeInsets.all(20.0),
           itemCount: Nations.itemCount,

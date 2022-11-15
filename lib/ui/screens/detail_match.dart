@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:world_cup_2022/ui/managers/nation_manager.dart';
-import '../../models/Match.dart';
-import '../../models/Stats.dart';
-
+import '../../models/match.dart';
+import 'package:provider/provider.dart';
 
 class DetailMatch extends StatelessWidget {
   static const routeName = '/detail_match';
 
-  const DetailMatch({super.key, required this.match, required this.title});
+  const DetailMatch(
+    this.match,{
+      super.key,
+    }
+  );
 
 
   final Match match;
-  final String title;
 
   @override 
   Widget build(BuildContext context){
@@ -23,14 +25,20 @@ class DetailMatch extends StatelessWidget {
           icon: new Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ), 
+        // actions: <Widget>[
+        //   IconButton(
+        //     icon: const Icon(Icons.edit),
+        //     onPressed: null,
+        //   )
+        // ],
       ),
       body:  TopCard(match),
     );
   } 
 
   Widget TopCard(Match match){
-    final nation1 = NationManager().findById(match.t1_id);
-    final nation2 = NationManager().findById(match.t2_id);
+    final nation1 = NationManager().findById(match.t1_name);
+    final nation2 = NationManager().findById(match.t2_name);
 
     return Card(
       margin: EdgeInsets.all(16.0),
@@ -50,10 +58,10 @@ class DetailMatch extends StatelessWidget {
                         height: 120,
                         child: Column(
                           children: [
-                            Image.asset(
-                              nation1.logo,
-                              width: 80,
-                              height: 80,
+                            Image(
+                              image: NetworkImage(nation1.imgURL),
+                              width: 50,
+                              height: 50,
                               fit: BoxFit.contain,
                             ),
                             SizedBox(
@@ -91,10 +99,10 @@ class DetailMatch extends StatelessWidget {
                         height: 120,
                         child: Column(
                           children: [
-                            Image.asset(
-                              nation2.logo,
-                              width: 80,
-                              height: 80,
+                            Image(
+                              image: NetworkImage(nation2.imgURL),
+                              width: 50,
+                              height: 50,
                               fit: BoxFit.contain,
                             ),
                             SizedBox(

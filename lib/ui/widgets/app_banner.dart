@@ -18,13 +18,15 @@ class AppBanner extends StatelessWidget {
         horizontal: 80.0,
       ),
       // transform: Matrix4.rotationZ(-8 * pi / 180)..translate(-10.0),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
+        color: Colors.white70,
+       
         image: DecorationImage(
-            image: NetworkImage('https://i.pinimg.com/originals/ec/82/a5/ec82a51e2d701406118f5d010b7fa0ab.png'),
-            fit: BoxFit.cover,
-          ),
+          image: NetworkImage('https://i.pinimg.com/originals/ec/82/a5/ec82a51e2d701406118f5d010b7fa0ab.png'),
+          fit: BoxFit.cover,
+        ),
       ),
-      child: Text(
+      child: const Text(
         '',
         style: TextStyle(
           color: Colors.amber,

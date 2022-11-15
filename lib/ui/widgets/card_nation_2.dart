@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:world_cup_2022/models/Nation.dart';
+import 'package:world_cup_2022/models/nation.dart';
 
 class CardNation2 extends StatelessWidget {
   CardNation2({super.key, required this.nation});
@@ -9,14 +9,14 @@ class CardNation2 extends StatelessWidget {
   Widget build(BuildContext context){
     return Card(
       shadowColor: Colors.red,
-      color: Color.fromARGB(255, 134, 209, 228),
+      color: Color.fromARGB(255, 255, 255, 255),
       child: Padding(  
         padding: EdgeInsets.all(10.0),
         child: FittedBox(
           child: Column(
             children: [
-              Image.asset(
-                nation.logo,
+              Image(
+                image: NetworkImage(nation.imgURL),
                 width: 100,
                 height: 100,
                 fit: BoxFit.contain,

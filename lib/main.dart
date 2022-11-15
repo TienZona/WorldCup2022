@@ -1,69 +1,85 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 import 'package:world_cup_2022/ui/managers/match_manager.dart';
-import 'package:world_cup_2022/ui/screens/detail_match.dart';
-import 'package:world_cup_2022/ui/screens/edit_match.dart';
-import 'package:world_cup_2022/ui/screens/list_nation.dart';
 import 'ui/screens.dart';
-import 'package:flutter/src/material/dropdown.dart';
-void main() {
+
+Future<void> main() async {
+  await dotenv.load();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  static Route<DateTime> _datePickerRoute(
-    BuildContext context,
-    Object? arguments,
-  ) {
-    return DialogRoute<DateTime>(
-      context: context,
-      builder: (BuildContext context) {
-        return DatePickerDialog(
-          restorationId: 'date_picker_dialog',
-          initialEntryMode: DatePickerEntryMode.calendarOnly,
-          initialDate: DateTime.fromMillisecondsSinceEpoch(arguments! as int),
-          firstDate: DateTime(2021),
-          lastDate: DateTime(2022),
-        );
-      },
-    );
-  }
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   
   Widget build(BuildContext context) {
-    final match = MatchManager().matchs;
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-      ),
-      home: MyHomePage(title: 'Lich Thi Dau'),
-      routes: {
-        ListNation.routeName: (context) =>  ListNation(),
-      },
-      onGenerateRoute: (settings) {
-        if (settings.name == DetailMatch.routeName) {
-          final matchId = settings.arguments as String;
-          return MaterialPageRoute(
-            builder: (ctx) {
-              return DetailMatch(
-                match: MatchManager().findById(matchId),
-                title: "App",
-              );
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AuthManager(),
+        ),
+        ChangeNotifierProxyProvider<AuthManager, MatchManager>(
+          create: (ctx) => MatchManager(),
+          update: (ctx, authManager, matchsmanager){
+            matchsmanager!.authToken = authManager.authToken;
+            return matchsmanager;
+          }
+        ),
+        ChangeNotifierProvider(create: (ctx) => MatchManager()),
+      ],
+      child: Consumer<AuthManager>(  
+        builder: (context, authManager, child) { 
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              fontFamily: 'Lato',
+              primarySwatch: Colors.green,
+            ),
+            debugShowCheckedModeBanner: false,
+            home: authManager.isAuth ?
+            const MyHomePage(title: 'Lich Thi Dau'):
+            FutureBuilder(
+              future: authManager.tryAutoLogin(),
+              builder: (ctx, snapshot) {
+                return snapshot.connectionState == ConnectionState.waiting
+                    ? const SplashScreen()
+                    : const AuthScreen();
+              },
+            ),
+            routes: {
+              ListNation.routeName: (context) =>  ListNation(),
+              AdminMatch.routeName: (context) =>  AdminMatch(),
             },
+            onGenerateRoute: (settings) {
+              if (settings.name == DetailMatch.routeName) {
+                final matchId = settings.arguments as String;
+                return MaterialPageRoute(
+                  builder: (ctx) {
+                    return DetailMatch(
+                      ctx.read<MatchManager>().findById(matchId),
+                    );
+                  },
+                );
+              }
+              if (settings.name == EditMatch.routeName) {
+                final matchId = settings.arguments as String?;
+                return MaterialPageRoute(
+                  builder: (ctx) {
+                    return EditMatch(
+                      matchId != null
+                      ? ctx.read<MatchManager>().findById(matchId)
+                      : null,
+                    );
+                  },
+                );
+              }
+            }
           );
         }
-        if (settings.name == EditMatch.routeName) {
-          // final matchId = settings.arguments as String;
-          return MaterialPageRoute(
-            builder: (ctx) {
-              return EditMatch(
-                null
-              );
-            },
-          );
-        }
-      }
+      )
     );
   }
 }

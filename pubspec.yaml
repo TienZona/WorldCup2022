@@ -16,7 +16,9 @@ dependencies:
   intl: ^0.17.0
   font_awesome_flutter: ^10.2.1
   provider: ^6.0.3
-
+  flutter_dotenv: ^5.0.2
+  shared_preferences: ^2.0.15
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -24,8 +26,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
   assets:
     - assets/logo/
     - assets/icon/
-
+    - .env

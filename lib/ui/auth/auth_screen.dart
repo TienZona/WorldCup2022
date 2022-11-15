@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../widgets/auth_card.dart';
-import '../widgets/app_banner.dart';
 
-class AuthScreen2 extends StatelessWidget {
+import '../widgets/app_banner.dart';
+import 'auth_card.dart';
+
+class AuthScreen extends StatelessWidget {
   static const routeName = '/auth';
 
-  const AuthScreen2({super.key});
+  const AuthScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

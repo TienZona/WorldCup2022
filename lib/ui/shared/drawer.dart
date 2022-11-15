@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:world_cup_2022/ui/screens/edit_match.dart';
 import 'package:world_cup_2022/ui/screens/list_nation.dart';
 import '../screens.dart';
+import '../screens/list_match.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -38,7 +40,18 @@ class AppDrawer extends StatelessWidget {
             title: const Text('Quản lý trận đấu'),
             onTap: () {
               Navigator.of(context)
-                  .pushReplacementNamed(EditMatch.routeName);
+                  .pushReplacementNamed(AdminMatch.routeName);
+            },
+          ),
+          const Divider(),
+          ListTile(  
+            leading: const Icon(Icons.exit_to_app),
+            title: const Text('Logout'),
+            onTap:  () {
+              Navigator.of(context)
+                ..pop()
+                ..pushReplacementNamed('/');
+              context.read<AuthManager>().logout();
             },
           ),
         ],
