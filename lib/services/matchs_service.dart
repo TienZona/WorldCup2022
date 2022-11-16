@@ -13,6 +13,9 @@ class MatchsService extends FirebaseService {
     final List<Match> matchs = [];
     final prefs = await SharedPreferences.getInstance();
     final String? _token = prefs.getString('token');
+    final String? email = prefs.getString('email');
+    final String? idUser = prefs.getString('idUser');
+
     try {
       // final filters = filterByUser ? 'orderBy="creatorId"&equalto="$userId"':'';
       final matchsUrl = Uri.parse('$databaseUrl/matchs.json?auth=$_token');
@@ -23,12 +26,18 @@ class MatchsService extends FirebaseService {
         return matchs;
       }
 
+      final userFollowUrl = Uri.parse('$databaseUrl/followMatch/$idUser.json?auth=$_token');
+      final userFollowResponse = await http.get(userFollowUrl);
+      final userFavoritesMap = json.decode(userFollowResponse.body);
       matchsMap.forEach((matchId, match) {
+        final isFollow = (userFavoritesMap == null)
+          ? false
+          : (userFavoritesMap[matchId] ?? false);
         matchs.add(  
           Match.fromJson({
             'id': matchId,
             ...match,
-          }),
+          }).copyWith(isFollow: isFollow),
         );
       });
       return matchs;
@@ -97,15 +106,19 @@ class MatchsService extends FirebaseService {
     }
   }
 
-  Future<bool> saveFavoriteStatus(Match product) async {
+  Future<bool> saveFollowMatch(Match match) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? _token = prefs.getString('token');
+    final String? idUser = prefs.getString('idUser');
+
     try {
       final url = Uri.parse(  
-        '$databaseUrl/userFavorites/$userId/${product.id}.json?auth=$token'
+        '$databaseUrl/followMatch/$idUser/${match.id}.json?auth=$_token'
       );
       final response = await http.put(  
         url,
         body: json.encode(  
-        true,
+        match.isFollow,
         ),
       );
 

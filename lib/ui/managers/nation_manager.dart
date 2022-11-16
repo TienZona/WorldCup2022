@@ -33,16 +33,18 @@ class NationManager with ChangeNotifier {
       Nation(name: 'Croatia', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/9toerdOg8xW4CRhDaZxsyw_96x96.png'),
       Nation(name: 'Đức', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/h1FhPLmDg9AHXzhygqvVPg_96x96.png'),
       Nation(name: 'Nhật Bản', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/by4OltvtZz7taxuQtkiP3A_96x96.png'),
-      Nation(name: 'Đức', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/h1FhPLmDg9AHXzhygqvVPg_96x96.png'),
       Nation(name: 'Tây Ban Nha', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/5hLkf7KFHhmpaiOJQv8LmA_96x96.png'),
       Nation(name: 'Costa Rica', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/ixZiM5pj2IvvYc15k-zfeQ_96x96.png'),
       Nation(name: 'Bỉ', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/6SF7yEoB60bU5knw-M7R5Q_96x96.png'),
       Nation(name: 'Canada', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/H23oIEP6qK-zNc3O8abnIA_96x96.png'),
       Nation(name: 'Thụy Sĩ', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/1hy9ek4dOIffYULM6k1fqg_96x96.png'),
       Nation(name: 'Cameroon', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/fmHyTSbJ-cYbY6WJzvqaZQ_96x96.png'),
-      Nation(name: 'Canada', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/fmHyTSbJ-cYbY6WJzvqaZQ_96x96.png'),
-      Nation(name: 'Canada', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/H23oIEP6qK-zNc3O8abnIA_96x96.png'),
-      Nation(name: 'Canada', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/H23oIEP6qK-zNc3O8abnIA_96x96.png'),
+      Nation(name: 'Uruguay', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/KnSUdQWiGRoy89q4x85IgA_96x96.png'),
+      Nation(name: 'Hàn Quốc', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/Uu5pwNmMHGd5bCooKrS3Lw_96x96.png'),
+      Nation(name: 'Bồ Đào Nha', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/HJ3_2c4w791nZJj7n-Lj3Q_96x96.png'),
+      Nation(name: 'Ghana', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/VJQ1emg0TOubjGnap4vWuw_96x96.png'),
+      Nation(name: 'Brasil', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/zKLzoJVYz0bb6oAnPUdwWQ_96x96.png'),
+      Nation(name: 'Serbia', imgURL: 'https://ssl.gstatic.com/onebox/media/sports/logos/xyh1vmZ-xJH2iJCKjqS1Ow_96x96.png'),
 
 
 

@@ -24,7 +24,7 @@ class AdminMatch extends StatelessWidget {
     final matchMangers = MatchManager();
     return Scaffold(
       appBar: AppBar(  
-        title: const Text('Danh sách các trận đấu'),
+        title: const Text('Quản lý các trận đấu'),
         actions: <Widget>[
           buildAddButton(context),
         ],
@@ -76,7 +76,12 @@ class AdminMatch extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               buildNationItem(matchManger.matchs[index].t1_name),
-                              const Text('vs'),
+                              Text(
+                                '${matchManger.matchs[index].t1_goal}   -   ${matchManger.matchs[index].t2_goal}',
+                                style: TextStyle(  
+                                  fontSize: 20
+                                ),
+                              ),
                               buildNationItem(matchManger.matchs[index].t2_name),
                               
                             ],
@@ -115,7 +120,7 @@ class AdminMatch extends StatelessWidget {
   Widget buildNationItem(String id){
     Nation nation = NationManager().findById(id);
     return SizedBox(
-      width: 120,
+      width: 80,
       child: Column(  
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

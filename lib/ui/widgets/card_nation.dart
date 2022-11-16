@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:world_cup_2022/models/nation.dart';
+import 'package:world_cup_2022/ui/managers/match_manager.dart';
 import 'package:world_cup_2022/ui/managers/nation_manager.dart';
 import 'package:world_cup_2022/ui/screens/detail_match.dart';
 import '../../models/match.dart';
@@ -103,20 +105,23 @@ class CardNation extends StatelessWidget {
                         fontSize: 24
                       ),
                     ),
-                    GestureDetector(
-                      child: SizedBox(
-                        height: 20,
-                        child: IconButton(  
-                          icon: Icon(  
-                              Icons.remove_red_eye_rounded,
+                    ValueListenableBuilder<bool>(
+                      valueListenable: match.isFollowListenable,
+                      builder: (ctx, isFavorite, child) {
+                        return SizedBox(
+                          height: 20,
+                          child: IconButton(  
+                            icon: Icon(  
+                              isFavorite ? Icons.remove_red_eye : Icons.remove_red_eye_outlined,
                             ),
-                            color: Theme.of(context).colorScheme.secondary,
+                            color: Colors.white,
                             onPressed: () {
-                                // ctx.read<ProductsManager>().toggleFavoriteStatus(product);
+                                ctx.read<MatchManager>().toggleFavoriteStatus(match);
                             },
-                        ),
-                      ),
-                    )
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),

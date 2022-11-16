@@ -76,23 +76,8 @@ class _EditMatchState extends State<EditMatch> {
 
     super.dispose();
   }
-  // Future<void> _saveForm() async {
-  //   try {
-  //     final matchMangers = context.read<MatchManager>();
-  //     if(_editedMatch.id != null){
-  //       await matchMangers.updateMatch(_editedMatch);
-  //     }else{
-  //       await matchMangers.addMatch(_editedMatch);
-  //     }
-  //   }catch(error){
-  //     await showErrorDialog(context, 'Something went wrong.');
-  //   } 
-
-  //   if(mounted){
-  //     Navigator.of(context).pop();
-  //   }
-  // }
-Future<void> _saveForm() async {
+ 
+  Future<void> _saveForm() async {
     final isValid = _editForm.currentState!.validate();
     if(!isValid){
       return;
@@ -136,7 +121,7 @@ Future<void> _saveForm() async {
           )
         ],
       ),
-      drawer: const AppDrawer(),
+      // drawer: const AppDrawer(),
       body: Container(  
         constraints: BoxConstraints(
           // maxHeight: 400.0,
@@ -583,7 +568,7 @@ Future<void> _saveForm() async {
             if(pickedTime != null ){
               DateTime parsedTime = DateFormat.jm().parse(pickedTime.format(context).toString());
             
-              String formattedTime = DateFormat('HH:mm:ss').format(parsedTime);
+              String formattedTime = DateFormat('HH:mm').format(parsedTime);
               setState(() {
                 timeinput.text = formattedTime; 
                 _editedMatch = _editedMatch.copyWith(time: formattedTime);

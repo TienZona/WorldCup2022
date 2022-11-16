@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:world_cup_2022/ui/screens/edit_match.dart';
-import 'package:world_cup_2022/ui/screens/list_nation.dart';
 import '../screens.dart';
-import '../screens/list_match.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final auth = context.read<AuthManager>();
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -26,6 +24,7 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           const Divider(),
+          
           ListTile(
             leading: const Icon(Icons.flag_outlined),
             title: const Text('Đội tuyển'),
@@ -35,6 +34,8 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           const Divider(),
+          auth.isAdmin
+          ? 
           ListTile(
             leading: const Icon(Icons.edit),
             title: const Text('Quản lý trận đấu'),
@@ -42,7 +43,14 @@ class AppDrawer extends StatelessWidget {
               Navigator.of(context)
                   .pushReplacementNamed(AdminMatch.routeName);
             },
+          )
+          : Text(
+            auth.email.toString(),
+            style: TextStyle(  
+              fontSize: 16
+            ),
           ),
+
           const Divider(),
           ListTile(  
             leading: const Icon(Icons.exit_to_app),

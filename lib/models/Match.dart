@@ -20,6 +20,7 @@ class Match {
   final int t2_foul;
   final int t2_yellowCard;
   final int t2_redCard;
+  final ValueNotifier<bool> _isFollow;
 
 
   Match({
@@ -41,8 +42,20 @@ class Match {
     required this.t2_possession,
     required this.t2_foul,
     required this.t2_yellowCard,
-    required this.t2_redCard
-  });
+    required this.t2_redCard,
+    isFollow = false,
+  }): _isFollow = ValueNotifier(isFollow);
+
+  set isFollow(bool newValue) {
+    _isFollow.value = newValue;
+  }
+  bool get isFollow {
+    return _isFollow.value;
+  }
+
+  ValueNotifier<bool> get isFollowListenable {
+    return _isFollow;
+  }
 
   Match copyWith({
     String? id,
@@ -63,7 +76,8 @@ class Match {
     int? t2_possession,
     int? t2_foul,
     int? t2_yellowCard,
-    int? t2_redCard
+    int? t2_redCard,
+    bool? isFollow
   }) {
     return Match(
       id: id ?? this.id,
@@ -84,7 +98,8 @@ class Match {
       t2_possession: t2_possession ?? this.t2_possession,
       t2_foul: t2_foul ?? this.t2_foul,
       t2_yellowCard: t2_yellowCard ?? this.t2_yellowCard,
-      t2_redCard: t2_redCard ?? this.t2_redCard
+      t2_redCard: t2_redCard ?? this.t2_redCard,
+      isFollow: isFollow ?? this.isFollow
     );
   }
 

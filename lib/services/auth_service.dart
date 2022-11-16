@@ -40,7 +40,7 @@ class AuthService {
       }
 
       final authToken = _fromJson(responseJson);
-      _saveAuthToken(authToken);
+      _saveAuthToken(authToken, email);
 
       return authToken;
     } catch (error) {
@@ -57,12 +57,14 @@ class AuthService {
     return _authenticate(email, password, 'signInWithPassword');
   }
 
-  Future<void> _saveAuthToken(AuthToken authToken) async {
+  Future<void> _saveAuthToken(AuthToken authToken, String email) async {
     final token = authToken.token;
-    print('token=$token');
     final prefs = await SharedPreferences.getInstance();
     prefs.setString(_authTokenKey, json.encode(authToken.toJson()));
     prefs.setString('token', token.toString());
+    prefs.setString('email', email);
+    prefs.setString('idUser', authToken.userId.toString());
+
   }
 
   AuthToken _fromJson(Map<String, dynamic> json) {

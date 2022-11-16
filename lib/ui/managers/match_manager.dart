@@ -27,6 +27,11 @@ class MatchManager with ChangeNotifier {
   List<Match> get matchs {
     return _items;
   }
+
+  List<Match> get favoriteItems {
+    return _items.where((prodItem) => prodItem.isFollow).toList();
+  }
+
   Match findById(String id){
     return _items.firstWhere((prod) => prod.id == id);
   }
@@ -58,6 +63,15 @@ class MatchManager with ChangeNotifier {
     if(!await _matchsService.deleteMatch(id)){
       _items.insert(index, existingProducct);
       notifyListeners();
+    }
+  }
+
+  Future<void> toggleFavoriteStatus(Match match) async {
+    final savedStatus = match.isFollow;
+    match.isFollow = !savedStatus;
+
+    if(!await _matchsService.saveFollowMatch(match)){
+      match.isFollow = savedStatus;
     }
   }
 }
