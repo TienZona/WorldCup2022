@@ -17,8 +17,8 @@ class AppDrawer extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.list_alt_sharp),
-            title: const Text('Lịch thi đấu'),
+            leading: const Icon(Icons.home),
+            title: const Text('Trang chủ'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
             },
